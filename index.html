@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BFM Booking</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { font-family: Arial; margin:0; }
+header { background:#0a3d62; color:white; text-align:center; padding:15px; }
+.section { padding:20px; }
+.service { border:1px solid #ccc; margin:10px; padding:10px; border-radius:8px; }
+button { background:#1e90ff; color:white; border:none; padding:8px; cursor:pointer; }
+.cart { position:fixed; bottom:0; width:100%; background:#0a3d62; color:white; padding:15px; text-align:center; }
+input, textarea { width:90%; padding:10px; margin:5px; }
+</style>
+
+<script>
+let total = 0;
+let services = [];
+
+function addService(name, price){
+total += price;
+services.push(name + " ₹" + price);
+document.getElementById("total").innerText = total;
+alert(name + " added!");
+}
+
+function sendWhatsApp(){
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
+
+let message = "New Booking:%0A";
+message += "Name: " + name + "%0A";
+message += "Phone: " + phone + "%0A";
+message += "Address: " + address + "%0A";
+message += "Services: " + services.join(", ") + "%0A";
+message += "Total: ₹" + total;
+
+let url = "https://wa.me/919910731532?text=" + message;
+
+window.open(url, '_blank');
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h2>Bless Facility Management Pvt Ltd</h2>
+<p>Deep Cleaning Booking</p>
+</header>
+
+<div class="section">
+
+<h3>🧼 Bathroom Cleaning</h3>
+<div class="service">1 Bathroom – ₹500 <button onclick="addService('1 Bathroom',500)">Add</button></div>
+<div class="service">2 Bathroom – ₹800 <button onclick="addService('2 Bathroom',800)">Add</button></div>
+<div class="service">3 Bathroom – ₹1100 <button onclick="addService('3 Bathroom',1100)">Add</button></div>
+
+<h3>🍳 Kitchen Cleaning</h3>
+<div class="service">Small Kitchen – ₹1490 <button onclick="addService('Small Kitchen',1490)">Add</button></div>
+<div class="service">Medium Kitchen – ₹1750 <button onclick="addService('Medium Kitchen',1750)">Add</button></div>
+<div class="service">Large Kitchen – ₹2350 <button onclick="addService('Large Kitchen',2350)">Add</button></div>
+
+<h3>🛋 Sofa Cleaning</h3>
+<div class="service">5 Seater – ₹1200 <button onclick="addService('5 Seater Sofa',1200)">Add</button></div>
+<div class="service">7 Seater – ₹1500 <button onclick="addService('7 Seater Sofa',1500)">Add</button></div>
+<div class="service">9 Seater – ₹1800 <button onclick="addService('9 Seater Sofa',1800)">Add</button></div>
+
+<h3>🛏 Mattress Cleaning</h3>
+<div class="service">Single – ₹400 <button onclick="addService('Single Mattress',400)">Add</button></div>
+<div class="service">Double – ₹700 <button onclick="addService('Double Mattress',700)">Add</button></div>
+
+<h3>🪟 Glass Cleaning</h3>
+<div class="service">Per Window – ₹100 <button onclick="addService('Window Cleaning',100)">Add</button></div>
+
+<h3>🏢 Full Home Package</h3>
+<div class="service">1 BHK – ₹3000 <button onclick="addService('1 BHK',3000)">Add</button></div>
+<div class="service">2 BHK – ₹5000 <button onclick="addService('2 BHK',5000)">Add</button></div>
+<div class="service">3 BHK – ₹6500 <button onclick="addService('3 BHK',6500)">Add</button></div>
+
+<h3>➕ Extra</h3>
+<div class="service">Fan – ₹50 <button onclick="addService('Fan Cleaning',50)">Add</button></div>
+<div class="service">Balcony – ₹500 <button onclick="addService('Balcony Cleaning',500)">Add</button></div>
+
+</div>
+
+<div class="section">
+<h3>📋 Customer Details</h3>
+<input type="text" id="name" placeholder="Your Name">
+<input type="number" id="phone" placeholder="Phone Number">
+<textarea id="address" placeholder="Address"></textarea>
+
+<button onclick="sendWhatsApp()">📲 Book on WhatsApp</button>
+</div>
+
+<div class="cart">
+Total: ₹ <span id="total">0</span>
+</div>
+
+</body>
+</html>
